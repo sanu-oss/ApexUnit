@@ -177,9 +177,17 @@ public class ApexClassFetcherUtils {
 				namespace = regexSplits[0];
 				regex = regex.substring(namespace.length() + 1);
 			}
+			LOG.info("Namespace = " + namespace);
+			LOG.info("Regex : " + regex);
+
 			String soql = QueryConstructor.generateQueryToFetchApexClassesBasedOnRegex(namespace, regex);
 			// fire the query using WSC and fetch the results
 			String[] classesAsArrayUsingWSC = constructClassIdArrayUsingWSC(connection, soql);
+			LOG.info("classesAsArrayUsingWSC length = " + classesAsArrayUsingWSC.length);
+			for(String classUsingWSC : classesAsArrayUsingWSC) {
+				LOG.info("classUsingWSC : " + classUsingWSC);
+			}
+
 			// if both manifest file and testClass regex expression is provided
 			// as command line option, combine the results
 
