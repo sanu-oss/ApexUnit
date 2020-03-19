@@ -27,6 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -124,7 +125,14 @@ public class ApexManifestFileReader {
 	private void insertIntoTestClassesArray(String strLine, ArrayList<String> testClassList){
 		String tempTestClassId = null;
 		Map<String, String> namespaceAndName = new HashMap<String, String>();
-		namespaceAndName.put("name",strLine);				
+
+		String[] strLineSplits = StringUtils.split(strLine, ".");
+		if(strLineSplits.length == 2) {
+			namespaceAndName.put("namespace", strLineSplits[0]);
+			namespaceAndName.put("name", strLineSplits[1]);
+		} else if(strLineSplits.length == 1) {
+			namespaceAndName.put("name", strLineSplits[0]);
+		}
 		
 		String soql = QueryConstructor.generateQueryToFetchApexClass(namespaceAndName.get("namespace"), 
 				namespaceAndName.get("name"));

@@ -5,7 +5,6 @@
  * For full license text, see LICENSE.txt file in the repo root  or https://opensource.org/licenses/BSD-3-Clause
  */
 -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
@@ -19,6 +18,10 @@
 	<prerequisites>
 		<maven>3.0.4</maven>
 	</prerequisites>
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
 	<!-- If an artifact does not exist in the local repository, 
 	it will then attempt to download from the default repository and then search in below remote repository(s). 
 	The default central Maven repository lives on http://repo.maven.apache.org/maven2 -->
