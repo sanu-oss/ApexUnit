@@ -21,6 +21,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -171,6 +172,11 @@ public class ApexClassFetcherUtils {
 			LOG.info("Using regex: \"" + regex + "\" to fetch apex classes");
 			// construct the query
 			String namespace = null;
+			String[] regexSplits = StringUtils.split(regex, ".");
+			if(regexSplits.length >= 2) {
+				namespace = regexSplits[0];
+				regex = regex.substring(namespace.length() + 1);
+			}
 			String soql = QueryConstructor.generateQueryToFetchApexClassesBasedOnRegex(namespace, regex);
 			// fire the query using WSC and fetch the results
 			String[] classesAsArrayUsingWSC = constructClassIdArrayUsingWSC(connection, soql);
